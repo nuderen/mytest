@@ -1,0 +1,144 @@
+<script>
+// values,variables,and literals-------------------
+var a = typeof "hoge";
+var b = typeof 100;
+var c = typeof true;
+var d = typeof null;
+var e = typeof hoge; // undefined => toplevel property which undefine value
+
+console.log(a);
+console.log(b);
+console.log(c);
+console.log(d);
+console.log(e);
+
+//no error
+var answer = 55;
+answer =  "Thanks for all the party"
+console.log(answer);
+
+var str = "123";
+var t = typeof str;
+console.log(t);
+
+var t = typeof parseInt(str);
+console.log(t); //return number
+
+var input;
+if(input === undefined){
+	console.log("undefined");
+}else{
+	console.log("defined");
+}
+
+var myArray = new Array();
+console.log(myArray);
+if(!myArray[0]) console.log("this is undefined");
+
+//scope ??
+var y = 100;
+if(true){
+	var x = 200;
+}
+console.log(x);
+
+var myvar = "global value";
+
+//即時関数なので読み込むと同時に実行される
+(function(){
+	console.log(myvar);
+	console.log("this value is local value,so you dont see this code");
+	var myvar = "local value";
+})();
+
+//webページでのグローバルオブジェクトはwindow
+
+
+const prefix = 212; // you cant change this value ,and you cant use value two times
+
+//array
+var coffees = ["French","Colombian","Kana"];
+console.log(coffees);
+console.log(coffees[2]);
+
+var myList = ['home',,"school",,];
+console.log(myList);
+
+var Sales = "Toyota";
+function carTypes(name){
+	return (name == 'Honda') ?  //三項演算子
+	 name : 
+	  "Sorry, we dont sell " + name + " .";
+}
+
+//オブジェクトリテラル
+var car = {myCar: "Saturn", getCar: carTypes("Honda"),specials: Sales};
+var car_1 = {myCar: "Saturn", getCar: carTypes("Mirai"),specials: Sales};
+
+console.log(car.myCar);
+console.log(car.getCar);
+console.log(car.specials);
+console.log(car_1.getCar);
+
+var car2 = {manyCars: {a:"Saab","b":"Jeep"},7 : "Mazea"};
+
+console.log(car2.manyCars.b)
+console.log(car2[7])
+
+var foo = {a: "alpha", 2: "two"};
+console.log(foo.a);    // alpha
+console.log(foo[2]);   // two
+//console.log(foo.2);  // Error: missing ) after argument list
+//console.log(foo[a]); // Error: a is not defined
+console.log(foo["a"]); // alpha
+console.log(foo["2"]); // two
+
+
+var l = "John's cat";
+console.log(l.length);
+
+
+
+
+// Array reference-----------------------------------
+var msgArray = new Array();
+console.log(msgArray);
+msgArray[0] = "Hello";
+msgArray[10] = "World!";
+console.log(msgArray);
+if(msgArray.length == 11){
+	console.log("array length is 11");
+}
+
+var arr = ["最初の要素","２番目の要素"];
+console.log(arr[arr.length -1]);
+
+var years = [1950, 1960, 1970, 1980, 1990, 2000, 2010];
+
+try {
+  //console.log(years.0);
+}
+catch (ex) {
+  console.log("ブラケット記法でのアクセス");
+  console.log(years[0]);
+}
+
+var fruits = [];
+fruits.push("banana","apple","peach");//末尾に追加
+console.log(fruits.length)
+fruits.push("pinaople");
+fruits[4] = "mango";
+console.log(fruits);
+
+// matchの結果を利用して配列を作成
+// 1 文字の d、1 文字以上の b、1 文字の d にマッチします
+// マッチした b およびその後の b を記憶します
+// 大文字小文字は区別しません
+var myRe = /d(b+)(d)/i;
+var myArray = myRe.exec("cdbBdbsbz");
+console.log(myArray);
+
+
+
+
+</script>

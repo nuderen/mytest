@@ -1,0 +1,21 @@
+<script type="text/javascript">
+function valVal(name,price){
+	this.name =name;
+	this.price = price;
+
+	function toArray(){
+		//return slice.call(this);
+		// console.log("this is my app");
+		// return this.name;
+		return name;
+	}
+
+	return this;
+}
+
+var value = valVal("kazu",1000);
+console.log(value.name);
+
+console.log(value.toArray);
+
+</script>

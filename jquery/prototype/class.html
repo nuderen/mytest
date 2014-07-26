@@ -1,0 +1,31 @@
+<script>
+//http://so-zou.jp/web-app/tech/programming/javascript/grammar/function/class/
+//クラス コンストラクタ
+function Foo()
+{
+	//プロパティ
+	this.x = 10;
+}
+
+var foo = new Foo();
+console.log(foo);
+
+//prototypeプロパティはObjectクラスから継承される
+//オブジェクトリテラル
+Foo.prototype = {
+	A :function() {console.log("A")},
+	B :function() {console.log("B")}
+};
+
+//prototyoプロパティによって,Numberなど組み込みオブジェクトにメソッドを追加できる
+//メソッドを新規に作成するわけではないので、オブジェクトリテラルの構文は使用できない
+Number.prototype.toHex = function()
+{
+	return this.toString(16);
+}
+
+var num = new Number(100);
+console.log(num);
+console.log(num.toHex());
+
+</script>

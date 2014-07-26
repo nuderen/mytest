@@ -1,0 +1,66 @@
+<script>
+//javascriptのクラス
+(function(){
+	var _toString = Object.prototype.toString, //prototypeで設計を定義
+		NULL_TYPE = 'NULL',
+		UNDEFINED_TYPE = 'Undefined',
+		BOOLEAN_TYPE = 'Boolean',
+		NUMBER_TYPE = 'Numver',
+		STRING_TYPE = 'String',
+		OBJECT_TYPE = 'Object';
+
+	var DONT_ENUMS = ['toString','toLocaleString'];
+
+	// Object.prototype.Type = function (o){
+	function Type(o){
+		switch(o){
+			case null: return NULL_TYPE
+			case (void 0): return UNDEFINED_TYPE;
+		}
+		var type = typeof o;
+		switch(type){
+			case 'boolean' :return BOOLEAN_TYPE;
+			case 'number' :return NUMBER_TYPE;
+			case 'string' :return STRING_TYPE;
+		}
+		return OBJECT_TYPE;
+	}
+
+	function extend(destination,source){
+		for(var property in source)
+			destination[property] = source[property];
+		return destination;
+	}
+
+	function values(object){
+		var results = [];
+		for(var property in object)
+			results.push(object[property]);
+		return results;
+	}
+
+	extend(Object,{
+		extend: 	extend,
+		values:     values
+	});
+
+})();
+
+var a =  new Object("kazu");
+console.log(a);
+console.log(a.values());
+
+
+
+//http://d.hatena.ne.jp/sandai/20110824/p1
+//即時関数 => 関数定義＋関数呼び出し => 無名関数で呼び出すのが一般的
+
+//クラスの定義
+//http://site.oukasei.com/?p=273
+
+
+
+
+
+
+</script>

@@ -1,0 +1,77 @@
+<script>
+// iterable -> 繰り返すことができる
+function $A(iterable){
+	if(!iterable) return [];
+	//return {"a":100,"b":200};
+
+	if("toArray" in Object(iterable)) return iterable.toArray();
+}
+
+var a = $A(100);
+console.log(a);
+
+var b = Object("kazu");
+console.log(b);
+
+// => arrayを一つ一つのオブジェクトに分解する
+var c_ary = ["toArray","nao","oti","ziko","yoko"];
+var d = Object(c_ary);
+console.log(d);
+
+var e = $A(c_ary);
+console.log(e);
+
+//95 ~ 
+// isStringなんてないんだけど
+function $w(string){
+	if(!Object.isString(string)) return [];
+	string = string.strip();
+	return string ? string.split(/\s+/) : [];
+}
+
+//var f  = isString("hoge");
+//console.log(f);
+
+// 187 ~ 
+(function(){
+	var arrayProto = Array.prototype;
+
+	//本物のソースコードとは違うけど,
+	//Arrayクラスのオブジェクトにclear関数を定義した。
+	Array.prototype.clear = function() {
+    	this.length = 0;
+    	return this;
+  	}
+
+
+  	//730 ~ 
+  	//ここでクラスに継承させてるんだと思うけど
+  	//Object.extend(arrayProto,Enumerable);
+
+})();
+
+var sAry = new Array()
+sAry[2] = "this"; 
+sAry[4] = "is"; 
+console.log(sAry);
+sAry.clear();
+console.log(sAry);
+
+//ectend関数を実装する
+//http://tmlife.net/programming/javascript/javascript-extend.html
+var meteo = {}; //namespace
+meteo.extend = function(dest,source){
+	for(var property in source){
+		dest[property] = source[property];
+	}
+	return dest; //dest内部の上書き+拡張
+}
+
+meteo.extend(meteo,{hoge:function(){console.log("hogehoge")}});
+meteo.hoge();
+
+
+
+
+
+</script>

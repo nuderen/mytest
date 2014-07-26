@@ -1,0 +1,177 @@
+<script type="text/javascript">
+//return uppar case
+var low = function(letter){
+	return letter.toUpperCase();
+}
+
+console.log(low("upper"));
+
+//example of call method 
+function Product(name,price){
+	this.name = name;
+	this.price = price;
+
+	if(price < 0) {
+		throw RangeError('cannot create product ' +  name + ' with a negative price');
+	}
+	return this; //caution!!!!! this is require!!!!!!!!!!!!!!!!!
+}
+
+var a = Product("gozila",10);
+console.log(a.name);
+
+// calls a function with a given this value and arguments provided individually
+function Food(name,price) {
+	Product.call(this,name,price);
+	this.category = 'food';
+
+	//thisの値が自信の中でのthisと同じ値になるようにcallメソッドを使用してコンストラクタを呼び出している
+}
+
+Food.prototype = new Product();
+
+var cheese = new Food('raddish',5);
+console.log(cheese);
+
+//http://d.hatena.ne.jp/maeharin/20130215/javascript_prototype_chain
+//the above url is about javascript prototype 
+//http://qiita.com/takeharu/items/809114f943208aaf55b3
+function Dog(){};
+
+Dog.prototype.bark = function(){
+	console.log("bowwow");
+};
+
+/*
+diffrent pattern without prototype property
+こっちは毎回空オブジェクトを作成するので、毎回新しく関数を定義してしまう
+
+function Dog(){
+	//var this = {};
+	this.bark = function(){
+		console.log('bowwow');
+	};
+	//return this;
+}
+*/
+
+var dog = new Dog();
+dog.bark();
+
+// prototypeは親
+// 子は親のプロパティを共通で使える
+function Cat(cry){
+	this.cry = cry;
+}
+
+Cat.prototype.spoilt = function(){
+	console.log(this.cry);
+}
+
+var ca = new Cat("cancan");
+console.log(ca.cry);
+ca.spoilt(); //関数が無駄に生成されない
+
+//☆汎用的な関数はprototypeに定義
+//prototype(親)に汎用的な関数を定義してインスタンス（子）はそれを使用できる
+
+//クロージャの使用(一番公式がわかりやすい件)
+// https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Closures
+function init(){
+	var name = "Mozilla";
+
+	//内部でしか使用できない
+	function displayName(){
+		console.log(name);
+	}
+	displayName();
+}
+
+var ini = init();
+
+function makeAdder(x){
+	return function(y){
+		return x + y;
+	}
+}
+var add5 = makeAdder(5);
+console.log(add5(2));
+
+//データの隠蔽+カプセル
+var Counter = (function(){
+	//以下はprivateなアイテム
+	var privateCounter = 0;
+
+	function changeBy(val){
+		privateCounter += val;
+	}
+
+	//環境１つに対して3つの関数で共有されている(同じ環境を共有するクロージャ)
+	return {
+		increment: function(){
+			changeBy(1);
+		},
+		value: function(){
+			return privateCounter;
+		}
+	}
+
+})();
+console.log(Counter.value());
+Counter.increment();
+console.log(Counter.value());
+
+// 89rows => @prototype property
+function jQuery(){
+	var versio = "1.11.1";
+	this.ver = "1.01.2"
+
+	return this; //これでいけるのでは？』
+};
+
+//89行目からのやつは、こちらはただのハッシュ化したもの！ var hash = {} 
+jQuery.prototype = {
+	jquery: this.versio,
+	jj: this.ver,
+	selector: "",
+
+	toJ: function(){
+		console.log(this.versio);
+	},
+	toB: function(){
+		console.log("to b is inline scope");
+	},
+	toA: function(){
+		console.log(this.jj);
+	}
+}
+
+var j = new jQuery();
+console.log(j.jquery);
+j.toJ();
+j.toB();
+console.log(j.jj);
+j.toA();
+//prottypeを関数で呼びださないと無理なのかも
+
+//89 ~ 174rows
+//function get(num){
+//	return num != null ? // 三項演算子 ? 真 : 偽
+//}
+
+console.log(eq("javascript"));
+
+//http://d.hatena.ne.jp/vividcode/20110106/1294336737
+//this
+
+var obj = {};
+obj.message = "message!!";
+obj.callback = function(){
+	console.log(this.message);
+};
+obj.callback();
+
+
+
+
+</script>

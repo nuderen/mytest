@@ -5,3 +5,5 @@ webrick
 
 
 example javascript code is .. prototype.js and ... jQuery
+
+vim test add plugin and check vim contents
